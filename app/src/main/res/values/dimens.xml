@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- For New Note -->
+    <dimen name="new_note_menu_bar_height">40dp</dimen>
+    <dimen name="new_note_line_padding_right">17.5dp</dimen>
+    <dimen name="new_note_content_padding_left">21dp</dimen>
+    <dimen name="new_note_content_padding_right">21dp</dimen>
+    <dimen name="new_note_content_padding_top">7.25dp</dimen>
+    <dimen name="new_note_content_padding_bottom">10dp</dimen>
+    <dimen name="new_note_content_textsize">16.5sp</dimen>
+    <dimen name="new_note_content_line_spacing_extra">14.5sp</dimen>
+</resources>

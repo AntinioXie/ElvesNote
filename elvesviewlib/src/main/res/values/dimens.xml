@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- animation time -->
+    <integer name="elves_shortAnimTime">200</integer>
+    <integer name="elves_mediumAnimTime">300</integer>
+    <integer name="elves_longAnimTime">300</integer>
+    <integer name="elves_halfLargeAnimTime">400</integer>
+    <integer name="elves_largeAnimTime">500</integer>
+</resources>
