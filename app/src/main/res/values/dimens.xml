@@ -9,4 +9,6 @@
     <dimen name="new_note_content_padding_bottom">10dp</dimen>
     <dimen name="new_note_content_textsize">16.5sp</dimen>
     <dimen name="new_note_content_line_spacing_extra">14.5sp</dimen>
+    <dimen name="new_note_menu_ver_line_height">14.3dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

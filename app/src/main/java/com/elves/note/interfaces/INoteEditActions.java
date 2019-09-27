@@ -33,4 +33,6 @@ public interface INoteEditActions {
      * set align style
      */
     void setAlignStyle(FontStyle.AlignStyle alignStyle);
+
+    void insertImage(String path);
 }

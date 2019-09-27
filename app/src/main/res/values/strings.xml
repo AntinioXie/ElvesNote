@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">ElvesNote</string>
     <string name="jumping">Jumping ...</string>
-    <string name="click_again_to_exit">Click again to exit.</string>
+    <string name="click_again_to_exit">再点一次退出.</string>
+    <string name="note">便签</string>
+    <string name="settings">设置</string>
+    <string name="view_list">列表模式</string>
+    <string name="undo">上一步</string>
+    <string name="redo">下一步</string>
+    <string name="save">保存</string>
+    <string name="set_reminder">设置提醒</string>
+    <string name="set_private">设为私密</string>
+    <string name="add_widget">发送到桌面</string>
+    <string name="save_to">移动到</string>
+    <string name="delete">删除</string>
+    <string name="share">分享</string>
 </resources>

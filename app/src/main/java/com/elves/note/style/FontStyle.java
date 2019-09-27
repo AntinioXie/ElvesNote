@@ -10,6 +10,10 @@ public class FontStyle {
     public int fontSize;
     public int fontColor;
 
+    public final static int NORMAL = 16;
+    public final static int SMALL = 14;
+    public final static int BIG = 18;
+
     public static class SelectionStyle {
     }
 

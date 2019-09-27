@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.PersistableBundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -18,6 +17,16 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_splash );
+    }
+
+    @Override
+    protected void initAction(BaseActivity baseActivity) {
+
+    }
+
+    @Override
+    public void initView(BaseActivity baseActivity) {
+
     }
 
     @Override

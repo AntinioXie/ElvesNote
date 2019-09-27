@@ -1,2 +1,2 @@
-include ':app', ':elvesviewlib'
+include ':app', ':elvesviewlib', ':statusbarlib'
 rootProject.name='ElvesNote'

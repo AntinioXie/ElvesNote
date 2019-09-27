@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/new_note_menu_bar_height"
-    android:background="#61B93B"
-    android:layout_alignParentBottom="true">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="show menu here" />
+    android:layout_alignParentBottom="true"
+    android:background="#ddffffff"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/menu_bullet"
+        style="@style/new_note_menu_item"
+        android:src="@drawable/new_note_menu_bullet_list_selector"/>
+
+    <View style="@style/MenuDivider" />
+
+    <ImageView
+        android:id="@+id/menu_mark"
+        style="@style/new_note_menu_item"
+        android:src="@drawable/new_note_menu_mark_selector"/>
+    <View style="@style/MenuDivider" />
+
+    <ImageView
+        android:id="@+id/menu_font_style"
+        style="@style/new_note_menu_item"
+        android:src="@drawable/new_note_menu_bullet_list_selector"/>
+
+    <View style="@style/MenuDivider" />
+
+    <ImageView
+        android:id="@+id/menu_take_pic"
+        style="@style/new_note_menu_item"
+        android:src="@drawable/new_note_menu_image_selector"/>
+
+    <View style="@style/MenuDivider" />
+
+    <ImageView
+        android:id="@+id/menu_voice"
+        style="@style/new_note_menu_item"
+        android:src="@drawable/new_note_menu_voice_selector"/>
 </LinearLayout>

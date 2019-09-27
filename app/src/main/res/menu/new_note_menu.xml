@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+       <item
+           android:title="@string/undo"
+           android:icon="@drawable/ic_undo_black_24dp"
+           app:showAsAction="always"/>
+        <item
+            android:title="@string/redo"
+            android:icon="@drawable/ic_redo_black_24dp"
+            app:showAsAction="always"/>
+        <item
+            android:title="@string/save"
+            android:icon="@drawable/ic_save_black_24dp"
+            app:showAsAction="always"/>
+    </group>
+    <group >
+        <item
+            android:title="@string/set_reminder"
+            android:icon="@drawable/ic_add_alarm_black_24dp"
+            app:showAsAction="never"/>
+        <item android:title="@string/set_private"
+            android:icon="@drawable/ic_private_black_24dp"/>
+        <item android:title="@string/add_widget"
+            android:icon="@drawable/ic_widgets_black_24dp"/>
+        <item android:title="@string/save_to"
+            android:icon="@drawable/ic_saveto_black_24dp"/>
+        <item android:title="@string/share"
+            android:icon="@drawable/ic_share_black_24dp"/>
+        <item android:title="@string/delete"
+            android:icon="@drawable/ic_delete_black_24dp"/>
+    </group>
+</menu>

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.text.Layout;
 import android.text.Spannable;
+import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
@@ -14,6 +15,7 @@ import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.inputmethod.InputMethodManager;
@@ -25,6 +27,7 @@ import com.elves.note.bean.SpanPart;
 import com.elves.note.interfaces.INoteEditActions;
 import com.elves.note.style.FontStyle;
 import com.elves.note.style.FontStyle.*;
+import com.elves.note.style.ImagePlate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -191,6 +194,15 @@ public class RichEditText extends AppCompatEditText implements INoteEditActions 
 
     }
 
+    @Override
+    public void insertImage(String path) {
+        if(!TextUtils.isEmpty( path )){
+            Log.i("test","path :"+path);
+            ImagePlate plate = new ImagePlate(this, this.getContext());
+            plate.image(path);
+        }
+    }
+
     private <T> void setSpan(FontStyle fontStyle,boolean isSet,Class<T> tClass){
         int start = getSelectionStart();
         int end = getSelectionEnd();
@@ -260,6 +272,7 @@ public class RichEditText extends AppCompatEditText implements INoteEditActions 
         }
         return  null;
     }
+
 
 
     /* Set font Style end*/
