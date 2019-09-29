@@ -66,6 +66,15 @@ public class RichEditText extends AppCompatEditText implements INoteEditActions 
     }
 
     @Override
+    protected void onSelectionChanged(int selStart, int selEnd) {
+        Log.i("test","onSelectionChanged:selStart = "+selStart+"  ,  selfEnd = "+selEnd+"  "+getEditableText().toString());
+        String currentStr = getEditableText().toString();
+        int newLineStartIndex = currentStr.lastIndexOf( "\n",selStart);
+        Log.i("test","newLineStartIndex  =" +newLineStartIndex);
+        super.onSelectionChanged( selStart, selEnd );
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(isHandleEvent){
             return super.onTouchEvent( event );
@@ -272,8 +281,6 @@ public class RichEditText extends AppCompatEditText implements INoteEditActions 
         }
         return  null;
     }
-
-
 
     /* Set font Style end*/
 }

@@ -9,7 +9,8 @@
     <ImageView
         android:id="@+id/menu_bullet"
         style="@style/new_note_menu_item"
-        android:src="@drawable/new_note_menu_bullet_list_selector"/>
+        android:src="@drawable/new_note_menu_bullet_list_selector"
+        />
 
     <View style="@style/MenuDivider" />
 
@@ -29,7 +30,8 @@
     <ImageView
         android:id="@+id/menu_take_pic"
         style="@style/new_note_menu_item"
-        android:src="@drawable/new_note_menu_image_selector"/>
+        android:src="@drawable/new_note_menu_image_selector"
+        android:onClick="onTakePicClick"/>
 
     <View style="@style/MenuDivider" />
 
