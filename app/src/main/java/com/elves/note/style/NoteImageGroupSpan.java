@@ -28,6 +28,14 @@ public class NoteImageGroupSpan extends NoteImageSpan {
         }
     }
 
+    public StringBuilder getSpanPlaceHoder(){
+        StringBuilder placeHolder = new StringBuilder(  );
+        for(NoteImageSpan span:mSpans){
+            placeHolder.append( "img" );
+        }
+        return placeHolder;
+    }
+
     public int getSubSpanSzie(){
         return mSpans.size();
     }

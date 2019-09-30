@@ -55,61 +55,137 @@ public class ImagePlate {
     }
 
 
-
     public void image(Uri uri, Bitmap pic) {
-        //实现插入图片组的逻辑
-        //占位符
-        StringBuilder img_str = new StringBuilder( "img" );
-        Log.i("test","img_str  =" +img_str);
-        //当前选择的位置
         int start = view.getSelectionStart();
         int end = view.getSelectionEnd();
         int currentStrLength = view.getEditableText().length();
         String currentStr = view.getEditableText().toString();
-        Log.i("test","length = "+currentStrLength+"  currentStr = "+currentStr);
-
-        //最后一个NoteImageGroupSpan的位置
-        NoteImageGroupSpan[] spans1 = view.getEditableText().getSpans( 0, end, NoteImageGroupSpan.class );
-        NoteImageGroupSpan lastSpan = spans1.length > 0 ? spans1[spans1.length - 1] : null;
-
-        //check the NoteImageGroupSpan start & end
-        int lastSpanStart = view.getEditableText().getSpanStart( lastSpan );
-        int lastSpanEnd = view.getEditableText().getSpanEnd( lastSpan );
-
-        boolean isSelectionStartWithNotImageGroup = false;
-        boolean isSelectionEndWithNotImageGroup = false;
-
-        boolean isStartNewLine= false;
-        boolean isEndNewLine = false;
-
-        int newLineStartIndex = currentStr.lastIndexOf( "\n",start);
-        if(newLineStartIndex!=-1&&newLineStartIndex+1==start){
-            isStartNewLine=true;
-        }
-        int newLineEndIndex = currentStr.indexOf( "\n",end);
-        if(newLineEndIndex!=-1&&newLineEndIndex==end){
-            isEndNewLine=true;
-        }
-
-
-
-        if (lastSpan == null) {
-            //we need add a new NoteImageGroupSpan
-        } else {
-            if(lastSpanStart<start&&lastSpanEnd>end){
-
+        Log.i( "test", "length = " + currentStrLength + "  currentStr = " + currentStr );
+        if (start == end) {
+            NoteImageGroupSpan[] spans1 = view.getEditableText().getSpans( 0, start, NoteImageGroupSpan.class );
+            NoteImageGroupSpan[] spans2 = view.getEditableText().getSpans( start, currentStrLength, NoteImageGroupSpan.class );
+            //获取当前位置的前面的最后一个NoteImageGroupSpan
+            //NoteImageGroupSpan span1 = spans1.length > 0 ? spans1[spans1.length - 1] : null;
+            //NoteImageGroupSpan span2 = spans2.length > 0 ? spans2[0] : null;
+            NoteImageGroupSpan tempSpan =null;
+            for(NoteImageGroupSpan span:spans1){
+                if(tempSpan==null){
+                    tempSpan = span;
+                }else{
+                    int i = view.getEditableText().getSpanEnd( tempSpan );
+                    int j = view.getEditableText().getSpanEnd( span );
+                    if(i< j){
+                        tempSpan = span;
+                    }
+                }
             }
-        }
+            NoteImageGroupSpan span1 = tempSpan;
 
-        SpannableString ss = new SpannableString( "\nimg\n\n" );
-        NoteImageSpan myImgSpan = new NoteImageSpan( mContext, pic, uri );
-        ss.setSpan( myImgSpan, 1, img_str.length() + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
-        view.getEditableText().insert( start, ss );// 设置ss要添加的位置
-        Log.i( "test1", CustomHtml.toHtml( view.getEditableText(), CustomHtml.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE ) );
-        //设置点击事件
-        //setClick(start+1,start+ss.length()-2,uri.getPath());
-        //view.requestLayout();
-        view.requestFocus();
+            NoteImageGroupSpan tempSpan2 =null;
+
+            for(NoteImageGroupSpan span:spans2){
+                if(tempSpan==null){
+                    tempSpan2 = span;
+                }else{
+                    int i = view.getEditableText().getSpanStart( tempSpan2 );
+                    int j = view.getEditableText().getSpanStart( span );
+                    if(i>j){
+                        tempSpan2 = span;
+                    }
+                }
+            }
+            NoteImageGroupSpan span2 = tempSpan2;
+            int start1 = view.getEditableText().getSpanStart( span1 );
+            int end1 = view.getEditableText().getSpanEnd( span1 );
+
+            int start2 = view.getEditableText().getSpanStart( span2 );
+            int end2 = view.getEditableText().getSpanEnd( span2 );
+
+            boolean isStartNewLine = false;
+            boolean isEndNewLine = false;
+            int newLineStartIndex = currentStr.lastIndexOf( "\n", start );
+            if (newLineStartIndex != -1 && newLineStartIndex + 1 == start) {
+                isStartNewLine = true;
+            }
+
+            int newLineEndIndex = currentStr.indexOf( "\n", end );
+            if (newLineEndIndex != -1 && newLineEndIndex == end) {
+                isEndNewLine = true;
+            }
+
+            Log.i( "test", "isStartNewLine:" + isStartNewLine + " ,  isEndNewLine:" + isEndNewLine );
+            Log.i( "test", "start:" + start + " ,  " + "  end:" + end );
+            Log.i( "test", "start1:" + start1 + "  end1:" + end1 );
+            Log.i( "test", "start2:" + start2 + "  end2:" + end2 );
+            NoteImageGroupSpan newGroupSpan = null;
+            boolean isNewGroup = false;
+            boolean isPreInsert = false;
+
+            Log.i("test","span1 size "+(span1==null?-1:span1.getSubSpanSzie()));
+            Log.i("test","span2 size "+(span2==null?-1:span2.getSubSpanSzie()));
+            if (span1 != null && start - 1 <= end1 && span1.getSubSpanSzie() < 4) {
+                //与span1合并
+                Log.i( "test", "与前面的Ｉｍａｇｅ group 合并" );
+                newGroupSpan = span1;
+                isPreInsert = true;
+            } else if (span2 != null && end + 1 >= start2 && span2.getSubSpanSzie() < 4) {
+                //与span2合并
+                Log.i( "test", "与后面的Ｉｍａｇｅ group 合并" );
+                newGroupSpan = span2;
+            } else {
+                //新建一个NoteImageGroupSpan
+                Log.i( "test", "新建一个Ｉｍａｇｅ group" );
+                newGroupSpan = new NoteImageGroupSpan( mContext, pic, uri );
+                isNewGroup = true;
+            }
+
+            NoteImageSpan newSpan = new NoteImageGroupSpan( mContext, pic, uri );
+            newGroupSpan.addSubSpan( newSpan );
+            StringBuilder placeHolder = newGroupSpan.getSpanPlaceHoder();
+            int spanStart = 0;
+            int endStart = placeHolder.length();
+            int groupInsertStart = start;
+            if (!isStartNewLine&&newLineStartIndex!=-1) {
+                if(isPreInsert){
+                    spanStart = 0;
+                }else if(isNewGroup){
+                    placeHolder.insert( 0, "\n" );
+                    spanStart = 1;
+                }
+
+                if (isNewGroup) {
+                    groupInsertStart = start;
+                } else {
+                    groupInsertStart = start1 == -1 ? 0 : start1;
+                }
+            }
+            if (!isEndNewLine) {
+                if(isPreInsert) {
+                    placeHolder.append( "\n" );
+                }
+                if (isNewGroup) {
+                    groupInsertStart = start;
+                } else {
+                    groupInsertStart = start2 == -1 ? 0 : start2;
+                }
+            }
+            Log.i( "test", "groupInsertStart : " + groupInsertStart + "  spanStart:" + spanStart + "  endStart:" + endStart );
+            SpannableString ss = new SpannableString( placeHolder.toString() );
+            ss.setSpan( newGroupSpan, spanStart, spanStart + endStart, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE );
+            if (isNewGroup) {
+                view.getEditableText().insert( groupInsertStart, ss );
+            } else {
+                if (isPreInsert) {
+                    view.getEditableText().replace( start1, end1, ss );
+                } else {
+                    Log.i( "xxxx", "before:" + view.getEditableText().toString() );
+                    view.getEditableText().replace( start2, end2, ss );
+                    Log.i( "xxxx", "end:" + view.getEditableText().toString() );
+                }
+            }
+            view.requestFocus();
+
+        }
     }
 
     public void setClick(int start, int end, final String path) {
